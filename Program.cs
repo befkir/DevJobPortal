@@ -1,3 +1,6 @@
+using DevJobPortal.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace DevJobPortal
 {
     public class Program
@@ -5,6 +8,11 @@ namespace DevJobPortal
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
+            });
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

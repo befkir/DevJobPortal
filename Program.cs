@@ -1,4 +1,5 @@
 using DevJobPortal.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DevJobPortal
@@ -13,6 +14,11 @@ namespace DevJobPortal
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
             });
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

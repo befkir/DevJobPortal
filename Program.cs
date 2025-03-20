@@ -37,6 +37,12 @@ namespace DevJobPortal
             {
                 var services = scope.ServiceProvider;
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!roleManager.RoleExistsAsync("Admin").Result) 
+                {
+                    var result= roleManager.CreateAsync(new IdentityRole("Admin")).Result;
+
+                }
             }
 
             app.UseHttpsRedirection();

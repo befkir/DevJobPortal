@@ -38,7 +38,7 @@ namespace DevJobPortal
             {
                 var services = scope.ServiceProvider;
                 RoleSeeder.seedRolesAsync(services).Wait();
-                
+                UserSeeder.SeedUsersAsync(services).Wait();
             }
 
             app.UseHttpsRedirection();
